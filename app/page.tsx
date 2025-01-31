@@ -1,8 +1,12 @@
+"use client"
+import { useState } from "react";
+import IconPicker from "./components/IconPicker";
 
 export default function Home() {
+  const [selectedIcon, setSelectedIcon] = useState<string>("Apple")
   return (
     <div>
-      <button className="btn">Test</button>
+       <IconPicker onIconSelect={setSelectedIcon} selected={selectedIcon}/>
     </div>
   );
 }
