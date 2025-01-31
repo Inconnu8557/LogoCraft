@@ -19,7 +19,14 @@ const IconPicker: React.FC<IconPickerProps> = ({ selected, onIconSelect }) => {
     const filteredIconNames = iconNames.filter((iconName) => {
         return iconName.toLowerCase().includes(searchText.toLocaleLowerCase())
     })
-
+    const handleIconClick = (iconName : IconName) => {
+        setSelectedIcon(iconName)
+        onIconSelect(iconName)
+        const modal = document.getElementById('my_modal_3') as HTMLDialogElement
+        if(modal){
+            modal.close();
+        }
+    }
     return (
         <div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -37,14 +44,14 @@ const IconPicker: React.FC<IconPickerProps> = ({ selected, onIconSelect }) => {
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                     />
-                    <div>
+                    <div className='grid grid-cols-6 gap-2'>
                         {filteredIconNames.map((iconName) => {
                             const IconComponent = icons[iconName]
                             return (
-                                <button key={iconName} className={`btn ${selectedIcon === iconName ? "btn-accent" : ""}`}>
+                                <button key={iconName} className={`btn ${selectedIcon === iconName ? "btn-accent" : ""}`}
+                                onClick={() => handleIconClick(iconName)}
+                                >
                                     <IconComponent size={30} />
-                                    {selectedIcon}
-                                    {iconName}
                                 </button>
                             )
                         })}
