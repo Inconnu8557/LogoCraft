@@ -9,10 +9,20 @@ export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState<IconName>("Apple");
   const SelectedIconComponent = selectedIcon && icons[selectedIcon as IconName] ?
     icons[selectedIcon as IconName] : null;
-  const [IconSize , setIconSize] = useState<number>(200)
+  const [IconSize, setIconSize] = useState<number>(200)
+  const [IconStrokeWidth, setIconStrokeWidth] = useState<number>(3)
+  const [IconRotation, setIconRotation] = useState<number>(10)
+
   const handleIconSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIconSize(Number (e.target.value))
+    setIconSize(Number(e.target.value))
   }
+  const handleIconStrokeWidth = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIconStrokeWidth(Number(e.target.value))
+  }
+  const handleRotationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIconRotation(Number(e.target.value))
+  }
+  
 
   return (
     <div>
@@ -45,19 +55,44 @@ export default function Home() {
           </div>
           <div className="bg-neutral-content/10 hover:bg-neutral-content/20 aspect-square border-2 border-base-300 hover:border-neutral/15 border-dashed p-5 md:p-20">
             <div id="iconContainer" className={`w-[450px] h-[450px] flex justify-center items-center`}>
-              {SelectedIconComponent  && (
-                <SelectedIconComponent size={} style={{ display: "block" }} />
+              {SelectedIconComponent && (
+                <SelectedIconComponent
+                  size={IconSize}
+                  style={{
+                    strokeWidth: IconStrokeWidth ,
+                    display: "block"
+                  }} />
               )}
             </div>
           </div>
         </div>
+
         <div className="w-1/4 p-5">
-          <div className="flex justify-between mb-3 text-gray-500">
+          <div className="mt-4">
+            <div className="flex justify-between mb-3 text-gray-500">
               <label className="badge badge-ghost">Taille</label>
               <span>{IconSize} px</span>
+            </div>
+            <div>
+              <input type="range" min="95" max="300" value={IconSize} onChange={handleIconSizeChange} className="range" />            </div>
           </div>
-          <div>
-            <input type="range" min="95" max="300" value={IconSize} onChange={handleIconSizeChange} className="range" />            </div>
+
+          <div className="mt-4">
+            <div className="flex justify-between mb-3 text-gray-500">
+              <label className="badge badge-ghost">Bordure</label>
+              <span>{IconStrokeWidth} px</span>
+            </div>
+            <div>
+              <input type="range" min="1" max="4" value={IconStrokeWidth} onChange={handleIconStrokeWidth} className="range" />            </div>
+          </div>
+          <div className="mt-4">
+            <div className="flex justify-between mb-3 text-gray-500">
+              <label className="badge badge-ghost">Rotation</label>
+              <span>{IconRotation} °</span>
+            </div>
+            <div>
+              <input type="range" min="1" max="4" value={IconRotation} onChange={handleRotationChange} className="range" />            </div>
+          </div>
         </div>
       </section>
     </div>
