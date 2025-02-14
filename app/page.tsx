@@ -15,7 +15,7 @@ export default function Home() {
   const [shadow, setShadow] = useState<string>("shadow-none")
   const [shadowNumber, setShadowNumber] = useState<number>(0)
   const [radius, setRadius] = useState<number>(12)
-
+  const [activeTab, setActiveTab] = useState<"stroke" | "background" | "fill">("stroke")
 
 
   const handleIconSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
