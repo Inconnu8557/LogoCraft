@@ -3,6 +3,7 @@ import { useState } from "react";
 import IconPicker from "./components/IconPicker";
 import Image from 'next/image'
 import { Download, icons } from "lucide-react";
+import ColorPicker from "./components/ColorPicker";
 type IconName = keyof typeof icons;
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
   const [shadowNumber, setShadowNumber] = useState<number>(0)
   const [radius, setRadius] = useState<number>(12)
   const [activeTab, setActiveTab] = useState<"stroke" | "background" | "fill">("stroke")
+  const [IconStrokeColor , setIconStrokeColor] = useState<string>("black")
 
 
   const handleIconSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,15 +56,28 @@ export default function Home() {
   return (
     <div>
       <section className="flex flex-col md:flex-row md:justify-between">
-        <div className="md:w-1/4">
+        <div className="md:w-1/4 p-5">
           <div className="flex items-center justify-center space-x-2 mb-4 w-full">
-            <button className={`btn w-1/3`}>
-                Bordure
+            <button className={`btn w-1/3 ${activeTab === "stroke" ? "btn-secondary" : ""}`} onClick={() => setActiveTab("stroke")}>
+              Bordure
             </button>
+            <button className={`btn w-1/3 ${activeTab === "background" ? "btn-secondary" : ""}`} onClick={() => setActiveTab("background")}>
+              Arrière-plan
+            </button>
+            <button className={`btn w-1/3 ${activeTab === "fill" ? "btn-secondary" : ""}`} onClick={() => setActiveTab("fill")}>
+              Remplissage
+              
+            </button>
+
 
           </div>
         </div>
-
+          <div>
+            // INFO: Selecteur de couleur
+            {activeTab === "stroke" && ((
+              <ColorPicker color={IconStrokeColor} allowGradient={false} onColorChange={}/>
+            )}
+          </div>
 
         <div className="md:w-2/4 flex justify-center items-center h-screen bg-[url('/file.svg')] bg-cover bg-center border border-base-200 pt-4 relative">
           <div className="flex items-center justify-between absolute top-0 left-0 bg-base-100 z-50 w-full p-3">
