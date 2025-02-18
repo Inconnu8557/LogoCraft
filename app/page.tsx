@@ -18,6 +18,8 @@ export default function Home() {
   const [radius, setRadius] = useState<number>(12)
   const [activeTab, setActiveTab] = useState<"stroke" | "background" | "fill">("stroke")
   const [IconStrokeColor , setIconStrokeColor] = useState<string>("black")
+  const [backgroundColor , setBackgroundColor] = useState<string>("linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)")
+  const [fillColor , setFillColor] = useState<string>("yellow")
 
 
   const handleIconSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +54,11 @@ export default function Home() {
   const handleRadiusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadius(Number(e.target.value))
   }
+  const getBackgroundStyle = () => {
+    return backgroundColor.startsWith("linear-gradient")
+      ? {background : backgroundColor}
+      : {backgroundColor :  backgroundColor}
+  }
 
   return (
     <div>
@@ -66,19 +73,19 @@ export default function Home() {
             </button>
             <button className={`btn w-1/3 ${activeTab === "fill" ? "btn-secondary" : ""}`} onClick={() => setActiveTab("fill")}>
               Remplissage
-              
             </button>
-
-
           </div>
+          {/* Color picker placé directement sous les boutons */}
+          {activeTab === "stroke" && (
+            <ColorPicker color={IconStrokeColor} allowGradient={false} onColorChange={setIconStrokeColor} />
+          )}
+          {activeTab === "background" && (
+            <ColorPicker color={backgroundColor} allowGradient={true} onColorChange={setBackgroundColor} />
+          )}
+          {activeTab === "fill" && (
+            <ColorPicker color={fillColor} allowGradient={false} onColorChange={setFillColor} />
+          )}
         </div>
-          <div>
-            {/* // INFO: Selecteur de couleur */}
-            {activeTab === "stroke" && (
-              <ColorPicker color={IconStrokeColor} allowGradient={false} onColorChange={setIconStrokeColor}/>
-            )}
-          </div>
-
         <div className="md:w-2/4 flex justify-center items-center h-screen bg-[url('/file.svg')] bg-cover bg-center border border-base-200 pt-4 relative">
           <div className="absolute top-0 left-0 z-50 flex items-center justify-between w-full p-3 bg-base-100">
             <div className="flex items-center text-2xl italic font-bold">
@@ -107,6 +114,7 @@ export default function Home() {
           <div className="p-5 border-2 border-dashed bg-neutral-content/10 hover:bg-neutral-content/20 aspect-square border-base-300 hover:border-neutral/15 md:p-20">
             <div id="iconContainer" className={`w-[450px] h-[450px] flex justify-center items-center ${shadow}`}
               style={{
+                ...getBackgroundStyle(),
                 borderRadius: `${radius}px`
               }}
             >
@@ -115,6 +123,8 @@ export default function Home() {
                   size={IconSize}
                   style={{
                     strokeWidth: IconStrokeWidth,
+                    fill : fillColor,
+                    stroke : IconStrokeColor,
                     display: "block",
                     transform: `rotate(${IconRotation}deg)`
 

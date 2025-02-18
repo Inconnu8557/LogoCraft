@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+#rbgcp-wrapper {
+    background-color: #FAF7F5;
+    width: 100%;
+    
+}
