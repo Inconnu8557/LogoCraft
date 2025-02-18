@@ -56,8 +56,8 @@ export default function Home() {
   return (
     <div>
       <section className="flex flex-col md:flex-row md:justify-between">
-        <div className="md:w-1/4 p-5">
-          <div className="flex items-center justify-center space-x-2 mb-4 w-full">
+        <div className="p-5 md:w-1/4">
+          <div className="flex items-center justify-center w-full mb-4 space-x-2">
             <button className={`btn w-1/3 ${activeTab === "stroke" ? "btn-secondary" : ""}`} onClick={() => setActiveTab("stroke")}>
               Bordure
             </button>
@@ -73,15 +73,15 @@ export default function Home() {
           </div>
         </div>
           <div>
-            // INFO: Selecteur de couleur
-            {activeTab === "stroke" && ((
-              <ColorPicker color={IconStrokeColor} allowGradient={false} onColorChange={}/>
+            {/* // INFO: Selecteur de couleur */}
+            {activeTab === "stroke" && (
+              <ColorPicker color={IconStrokeColor} allowGradient={false} onColorChange={setIconStrokeColor}/>
             )}
           </div>
 
         <div className="md:w-2/4 flex justify-center items-center h-screen bg-[url('/file.svg')] bg-cover bg-center border border-base-200 pt-4 relative">
-          <div className="flex items-center justify-between absolute top-0 left-0 bg-base-100 z-50 w-full p-3">
-            <div className="flex items-center font-bold italic text-2xl">
+          <div className="absolute top-0 left-0 z-50 flex items-center justify-between w-full p-3 bg-base-100">
+            <div className="flex items-center text-2xl italic font-bold">
               <Image
                 src="/logo.png"
                 width={500}
@@ -89,11 +89,11 @@ export default function Home() {
                 className="w-10 h-10"
                 alt="logo"
               />
-              <span className="text-secondary ml-2">e</span>Logo
+              <span className="ml-2 text-secondary">e</span>Logo
             </div>
             <div className="flex items-center">
-              <IconPicker onIconSelect={setSelectedIcon} selected={selectedIcon} />
-              <button className="btn ml-5"
+              <IconPicker onIconSelect={(icon: string) => setSelectedIcon(icon as IconName)} selected={selectedIcon} />
+              <button className="ml-5 btn"
                 onClick={() => {
                   const m = document.getElementById('my_modal_1') as HTMLDialogElement;
                   if (m) {
@@ -104,7 +104,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="bg-neutral-content/10 hover:bg-neutral-content/20 aspect-square border-2 border-base-300 hover:border-neutral/15 border-dashed p-5 md:p-20">
+          <div className="p-5 border-2 border-dashed bg-neutral-content/10 hover:bg-neutral-content/20 aspect-square border-base-300 hover:border-neutral/15 md:p-20">
             <div id="iconContainer" className={`w-[450px] h-[450px] flex justify-center items-center ${shadow}`}
               style={{
                 borderRadius: `${radius}px`
