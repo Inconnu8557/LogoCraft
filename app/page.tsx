@@ -7,7 +7,7 @@ import ColorPicker from "./components/ColorPicker";
 import React from "react";
 type IconName = keyof typeof icons;
 
-//IDEA:Ajouter une navbar et un bouton pour se connecter 
+//IDEA:Ajouter une navbar et un bouton pour se connecter
 
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState<IconName>("Apple");
@@ -67,7 +67,7 @@ export default function Home() {
       ? { background: backgroundColor }
       : { backgroundColor: backgroundColor };
   };
-  const getPresetBackgroundStyle = (color : string) => {
+  const getPresetBackgroundStyle = (color: string) => {
     return color.startsWith("linear-gradient")
       ? { background: color }
       : { backgroundColor: color };
@@ -215,6 +215,17 @@ export default function Home() {
     },
   ];
 
+  const handlePresetSelect = (preset: (typeof logoPresets)[0]) => {
+    setSelectedIcon(preset.icon as IconName);
+    setIconSize(preset.iconSize);
+    setIconStrokeColor(preset.iconStrokeColor);
+    setIconStrokeWidth(preset.iconStrokeWidth);
+    setIconRotation(preset.iconRotation);
+    setBackgroundColor(preset.backgroundColor);
+    setFillColor(preset.fillColor);
+    setRadius(preset.radius * 8);
+  };
+
   return (
     <div>
       <section className="flex flex-col md:flex-row md:justify-between">
@@ -298,7 +309,7 @@ export default function Home() {
                   }
                 }}
               >
-                Téléchager <Download className="w-4" />
+                Télécharger <Download className="w-4" />
               </button>
             </div>
           </div>
@@ -418,10 +429,14 @@ export default function Home() {
             <h3 className="text-lg font-bold mb-4">Préréglages</h3>
             <div className="flex flex-wrap gap-2">
               {logoPresets.map((preset) => (
-                <div key={preset.id} className="pointer">
+                <div
+                  key={preset.id}
+                  className="cursor-pointer"
+                  onClick={() => handlePresetSelect(preset)}
+                >
                   <div
                     id="iconContainer"
-                    className={`w-16 h-16 flex justify-center items-center ${shadow}`}
+                    className={`w-16 h-16 flex justify-center items-center`}
                     style={{
                       ...getPresetBackgroundStyle(preset.backgroundColor),
                       borderRadius: `${preset.radius}px`,
@@ -433,11 +448,11 @@ export default function Home() {
                         {
                           size: 30,
                           style: {
-                            strokeWidth: IconStrokeWidth,
+                            strokeWidth: preset.iconStrokeWidth,
                             fill: preset.fillColor,
                             stroke: preset.iconStrokeColor,
                             display: "block",
-                            transform: `rotate(${IconRotation}deg)`,
+                            transform: `rotate(${preset.iconRotation}deg)`,
                           },
                         }
                       )}
@@ -448,6 +463,23 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <button
+        className="btn"
+        onClick={() => (document.getElementById("my_modal_1") as HTMLDialogElement).showModal()}
+      >
+        open modal
+      </button>
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">Press ESC key or click outside to close</p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 }
