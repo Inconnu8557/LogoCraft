@@ -463,8 +463,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
       <button
         className="btn"
         onClick={() => (document.getElementById("my_modal_1") as HTMLDialogElement).showModal()}
