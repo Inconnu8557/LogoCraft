@@ -7,6 +7,8 @@ import ColorPicker from "./components/ColorPicker";
 import React from "react";
 type IconName = keyof typeof icons;
 
+//IDEA:Ajouter une navbar et un bouton pour se connecter 
+
 export default function Home() {
   const [selectedIcon, setSelectedIcon] = useState<IconName>("Apple");
   const SelectedIconComponent =
