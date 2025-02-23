@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Download, icons, Presentation } from "lucide-react";
 import ColorPicker from "./components/ColorPicker";
 import React from "react";
+import domtoimage from "dom-to-image";
+import { error } from "console";
 type IconName = keyof typeof icons;
 
 //IDEA:Ajouter une navbar et un bouton pour se connecter
@@ -29,6 +31,8 @@ export default function Home() {
     "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)"
   );
   const [fillColor, setFillColor] = useState<string>("yellow");
+  const [isDownloading, setIsDownloading] = useState<boolean>(false);
+  const [downloadCompleted, setDownloadCompleted] = useState<boolean>(false);
 
   const handleIconSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIconSize(Number(e.target.value));
@@ -224,6 +228,34 @@ export default function Home() {
     setBackgroundColor(preset.backgroundColor);
     setFillColor(preset.fillColor);
     setRadius(preset.radius * 8);
+  };
+
+  const handleDownoaldImage = (format: "png" | "svg") => {
+    setIsDownloading(true);
+    setDownloadCompleted(false);
+    const element = document.getElementById("iconContainer");
+    if (element) {
+      let imagePromise;
+      if (format == "svg") {
+        imagePromise = domtoimage.toSvg(element, { bgcolor: undefined });
+      } else {
+        imagePromise = domtoimage.toPng(element, { bgcolor: undefined });
+      }
+
+      imagePromise
+        .then((dataURL: string) => {
+          const link = document.createElement("a");
+          link.href = dataURL;
+          link.download = `logo.${format}`;
+          link.click();
+          setIsDownloading(false);
+          setDownloadCompleted(true);
+        })
+        .catch((error: any) => {
+          console.error(error);
+          setIsDownloading(false);
+        });
+    }
   };
 
   return (
@@ -435,7 +467,7 @@ export default function Home() {
                   onClick={() => handlePresetSelect(preset)}
                 >
                   <div
-                    id="iconContainer"
+                    // id="iconContainer"
                     className={`w-16 h-16 flex justify-center items-center`}
                     style={{
                       ...getPresetBackgroundStyle(preset.backgroundColor),
@@ -465,14 +497,46 @@ export default function Home() {
       </section>
       <button
         className="btn"
-        onClick={() => (document.getElementById("my_modal_1") as HTMLDialogElement).showModal()}
+        onClick={() =>
+          (
+            document.getElementById("my_modal_1") as HTMLDialogElement
+          ).showModal()
+        }
       >
         open modal
       </button>
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click outside to close</p>
+          {isDownloading ? (
+            <div className="flex justify-center">
+              <progress className="progress w-full progress-secondary my-20"></progress>
+            </div>
+          ) : downloadCompleted ? (
+            <div className="text-center my-4">
+              <p className="text-md font-bold">Le téléchargement a été effectué avec succès ! </p>
+
+            </div>
+          ) : (
+            <div>
+              <h3 className="font-bold text-lg text-center mb-4">
+                Choisissez un format
+              </h3>
+              <div className="space-x-3 flex justify-center">
+                <button
+                  className="btn"
+                  onClick={() => handleDownoaldImage("png")}
+                >
+                  PNG
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => handleDownoaldImage("svg")}
+                >
+                  SVG
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
