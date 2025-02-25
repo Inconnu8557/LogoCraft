@@ -4,6 +4,7 @@ import IconPicker from "./components/IconPicker";
 import { useState } from "react";
 import { Download, icons } from "lucide-react";
 import ColorPicker from "./components/ColorPicker";
+import NavBar from "./components/Navbar";
 import React from "react";
 import domtoimage from "dom-to-image"
 import confetti from "canvas-confetti"
@@ -267,6 +268,7 @@ export default function Home() {
 
   return (
     <div>
+      <NavBar />
       <section className=" flex flex-col md:flex-row md:justify-between">
 
         <div className="md:w-1/4 p-5">
