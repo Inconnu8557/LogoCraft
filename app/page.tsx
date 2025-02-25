@@ -256,7 +256,7 @@ export default function Home() {
           setIsDownloading(false)
           setDownloadCompleted(true)
         })
-        .catch((error: any) => {
+        .catch((error: unknown) => {
           console.error(error)
           setIsDownloading(false)
         })
