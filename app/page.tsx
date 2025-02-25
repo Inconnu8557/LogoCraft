@@ -2,7 +2,7 @@
 import Image from "next/image";
 import IconPicker from "./components/IconPicker";
 import { useState } from "react";
-import { Download, icons, LineChart } from "lucide-react";
+import { Download, icons } from "lucide-react";
 import ColorPicker from "./components/ColorPicker";
 import React from "react";
 import domtoimage from "dom-to-image"
