@@ -1,20 +1,29 @@
 "use client"
 import React from "react";
+import Link from "next/link";
 
 const NavBar: React.FC = () => {
   return (
     <nav className="shadow-md bg-base-100">
       <div className="container flex items-center justify-between px-4 py-4 mx-auto">
-        <a href="/" className="text-2xl font-bold cursor-pointer">eLogo</a>
+        <Link href="/">
+          <span className="text-2xl font-bold cursor-pointer">LogoCraft</span>
+        </Link>
         <ul className="flex space-x-6">
           <li>
-            <a href="/" className="font-bold cursor-pointer hover:text-secondary">Accueil</a>
+            <Link href="/">
+              <span className="font-bold cursor-pointer hover:text-secondary">Accueil</span>
+            </Link>
           </li>
           <li>
-            <a href="/about" className="font-bold cursor-pointer hover:text-secondary">À propos</a>
+            <Link href="/about">
+              <span className="font-bold cursor-pointer hover:text-secondary">À propos</span>
+            </Link>
           </li>
           <li>
-            <a href="/contact" className="font-bold cursor-pointer hover:text-secondary">Se connecter</a>
+            <Link href="/contact">
+              <span className="font-bold cursor-pointer hover:text-secondary">Se connecter</span>
+            </Link>
           </li>
         </ul>
       </div>
