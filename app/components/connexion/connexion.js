@@ -1,11 +1,9 @@
-const SignInBtnLink = document.querySelector('.signin-btn-link');
-const SignUpBtnLink = document.querySelector('.signUp-btn-link');
+const signInBtnLink = document.querySelector('.signInBtn-link');
+const signUpBtnLink = document.querySelector('.signUpBtn-link');
 const wrapper = document.querySelector('.wrapper');
-
-SignUpBtnLink.addEventListener('click', () => {
+signUpBtnLink.addEventListener('click', () => {
     wrapper.classList.toggle('active');
-})
-
-SignInBtnLink.addEventListener('click', () => {
+});
+signInBtnLink.addEventListener('click', () => {
     wrapper.classList.toggle('active');
-})
+});
