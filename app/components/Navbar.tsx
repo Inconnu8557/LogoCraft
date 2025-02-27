@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 const NavBar: React.FC = () => {
-  const [theme, setTheme] = useState<string>("cupcake");
+  const [setTheme] = useState<string>("cupcake");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
