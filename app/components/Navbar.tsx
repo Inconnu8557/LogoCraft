@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const NavBar: React.FC = () => {
   const [theme, setTheme] = useState<string>(localStorage.getItem("theme") || "cupcake");
-  const handleToggle = (e: { target: { checked: any; }; }) => {
+  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(e.target.checked) {
       setTheme("dark");
     } else {
