@@ -5,21 +5,27 @@ import Link from "next/link";
 //IDEA: Utiliser les Navbars de TailwindCSS
 
 const NavBar: React.FC = () => {
-  const [theme, setTheme] = useState<string>(localStorage.getItem("theme") || "cupcake");
+  const [theme, setTheme] = useState<string>("cupcake");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const localTheme = localStorage.getItem("theme");
+      if (localTheme) {
+        setTheme(localTheme);
+        document.querySelector("html")?.setAttribute("data-theme", localTheme);
+      }
+    }
+  }, []);
+
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.checked) {
-      setTheme("dark");
-    } else {
-      setTheme("cupcake");
+    const newTheme = e.target.checked ? "dark" : "cupcake";
+    setTheme(newTheme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", newTheme);
+      document.querySelector("html")?.setAttribute("data-theme", newTheme);
     }
   };
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    if (localTheme) {
-      document.querySelector("html")?.setAttribute("data-theme", localTheme);
-    }
-  }, [theme]);
+
   return (
     <nav className="shadow-md bg-base-100 text-base-content sticky top-0 z-50">
       <div className="container flex items-center justify-between px-4 py-4 mx-auto">
