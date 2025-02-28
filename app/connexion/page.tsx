@@ -72,7 +72,7 @@ const Connexion: React.FC = () => {
           </form>
         </div>
       </div>
-      <script src="/connexion.js"></script>
+      <script async src="/connexion.js"></script>
     </>
   );
 };
