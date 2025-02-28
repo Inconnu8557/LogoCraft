@@ -51,7 +51,7 @@ const NavBar: React.FC = () => {
             </label>
           </li>
           <li>
-            <Link href="/app/components/connexion/connexion.html">
+            <Link href="/connexion">
               <button className="font-bold cursor-pointer hover:text-secondary">
                 Se connecter
               </button>
