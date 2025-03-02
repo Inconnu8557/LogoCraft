@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const [theme, setTheme] = useState<string>("cupcake");
+
 const NavBar: React.FC = () => {
   const [theme, setTheme] = useState<string>("cupcake");
 

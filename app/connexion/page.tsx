@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-sync-scripts */
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -33,7 +34,7 @@ const Connexion: React.FC = () => {
             <button type="submit">Login</button>
             <div className="signUp-link">
               <p>
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href="#" className="signUpBtn-link">
                   Sign Up
                 </Link>
@@ -58,7 +59,7 @@ const Connexion: React.FC = () => {
             </div>
             <div className="remember">
               <label>
-                <input type="checkbox" /> I agree to the terms & conditions
+                <input type="checkbox" /> I agree to the terms &amp; conditions
               </label>
             </div>
             <button type="submit">Sign Up</button>
