@@ -99,79 +99,105 @@ const Connexion: React.FC = () => {
           padding: 40px;
           overflow: hidden;
         }
+        .wrapper:hover {
+          animation: animate 1s linear infinite;
+        }
+        @keyframes animate {
+          100% {
+            filter: hue-rotate(360deg);
+          }
+        }
         .form-wrapper {
           display: flex;
-          flex-direction: column;
           justify-content: center;
           align-items: center;
           width: 100%;
           height: 100%;
           transition: 1s ease-in-out;
         }
+        .wrapper.active .form-wrapper.sign-in {
+          transform: translateY(-450px);
+        }
+        .wrapper .form-wrapper.sign-up {
+          position: absolute;
+          top: 450px;
+          left: 0;
+        }
+        .wrapper.active .form-wrapper.sign-up {
+          transform: translateY(-450px);
+        }
         h2 {
           font-size: 30px;
           color: #fff;
           text-align: center;
-          margin-bottom: 20px;
         }
         .input-group {
           position: relative;
-          margin: 20px 0;
+          margin: 30px 0;
           border-bottom: 2px solid #fff;
-          width: 100%;
-        }
-        .input-group input {
-          width: 100%;
-          background: transparent;
-          border: none;
-          outline: none;
-          color: #fff;
-          font-size: 16px;
-          padding: 10px 5px;
         }
         .input-group label {
           position: absolute;
           top: 50%;
           left: 5px;
           transform: translateY(-50%);
+          font-size: 16px;
           color: #fff;
-          transition: 0.3s;
           pointer-events: none;
+          transition: 0.5s;
+        }
+        .input-group input {
+          width: 320px;
+          height: 40px;
+          font-size: 16px;
+          color: #fff;
+          padding: 0 5px;
+          background: transparent;
+          border: none;
+          outline: none;
         }
         .input-group input:focus ~ label,
-        .input-group input:not(:placeholder-shown) ~ label {
-          top: 0;
-          font-size: 12px;
-          color: #0ef;
+        .input-group input:valid ~ label {
+          top: -5px;
         }
         .remember {
-          margin: 10px 0;
+          margin: -5px 0 15px 5px;
+        }
+        .remember label {
           color: #fff;
           font-size: 14px;
         }
+        .remember label input {
+          accent-color: #0ef;
+        }
         button {
+          position: relative;
           width: 100%;
-          padding: 10px;
-          margin: 20px 0;
-          border: none;
-          border-radius: 30px;
+          height: 40px;
           background: #0ef;
-          color: #000;
-          font-size: 16px;
-          cursor: pointer;
           box-shadow: 0 0 10px #0ef;
+          font-size: 16px;
+          color: #000;
+          font-weight: 500;
+          cursor: pointer;
+          border-radius: 30px;
+          border: none;
+          outline: none;
         }
         .signUp-link {
           font-size: 14px;
           text-align: center;
+          margin: 15px 0;
+        }
+        .signUp-link p {
           color: #fff;
         }
-        .signUp-link a {
+        .signUp-link p a {
           color: #0ef;
           text-decoration: none;
-          font-weight: bold;
+          font-weight: 500;
         }
-        .signUp-link a:hover {
+        .signUp-link p a:hover {
           text-decoration: underline;
         }
       `}</style>
