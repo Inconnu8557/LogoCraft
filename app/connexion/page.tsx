@@ -73,7 +73,7 @@ const Connexion: React.FC = () => {
           </form>
         </div>
       </div>
-      <script src="/connexion.js"></script>
+      <Script src="/connexion.js" strategy="afterInteractive" />
     </>
   );
 };
